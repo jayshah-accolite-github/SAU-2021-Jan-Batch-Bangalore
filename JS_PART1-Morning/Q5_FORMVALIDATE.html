@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O5 : Assignment</title>
+   
+</head>
+<body>
+   
+    <div  style="display: flex; width: max-content;height: max-content;justify-content: center;padding: 13rem;background-color: aqua;">
+    <form action="/" id="form" method="GET">
+        <div>
+             <div id="error"></div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text">
+            <br>
+            <label for="Email">Email</label>
+            <input id="email" name="email" type="email">
+            <br>
+            <p>Select your college:</p>
+            <input type="radio" name="college" value="DJ SANGHVI">
+            <label for="male">DJ SANGHVI</label>
+            <br>
+            <input type="radio" name="college" value="OTHER">
+            <label for="female">OTHER</label>
+            <br>
+            <label for="genders">Choose gender:</label>
+            <select id="genders" name="genders">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <br>
+            <div style="padding-top: 1rem;"> 
+            <button type="submit" >Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+    <script>
+        const name =document.getElementById("name")
+        const email =document.getElementById("email")
+        const form=document.getElementById("form")
+        const error=document.getElementById("error")
+        const radioCollege=document.getElementsByName("college")
+        const gender=document.getElementById("genders")
+        let radioResponse=false
+        let radioResponseIndex=null
+        form.addEventListener("submit",(e)=>{
+            let message=[]
+            let rightMessage=[]
+            if(name.value===''||name.value==null)
+            {
+                message.push("Name Req")
+            }else{
+                rightMessage.push({"name":name.value})
+            }
+            if(email.value===''||email.value==null)
+            {
+                message.push("Email Req")
+            }else{
+                rightMessage.push({"email":email.value})
+            }
+            let i=0
+            while(!radioResponse&& i<radioCollege.length)
+            {
+                if (radioCollege[i].checked)
+                {
+                    radioResponse = true
+                    radioResponseIndex=i
+                }
+                i++
+            }
+            
+            if(radioResponseIndex==null)
+            {
+                message.push("College Req")
+                
+            }
+            else{
+                rightMessage.push({"college":radioCollege[radioResponseIndex].value})
+            }
+            rightMessage.push({"gender":gender.value})
+            if(message.length>0)
+            {
+            e.preventDefault()
+            alert(message.join(", "))
+            }   
+            else{
+                    e.preventDefault()
+                    alert("Done Check Console for Output :)")
+                console.log(JSON.stringify(rightMessage))
+                }
+        })
+    </script>
+</body>
+</html>
