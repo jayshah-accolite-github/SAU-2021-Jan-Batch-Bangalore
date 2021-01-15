@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O5 : Assignment</title>
+   
+</head>
+<body>
+   
+    <div  style="display: flex; flex-direction: column;width: max-content;height: max-content;justify-content: center;padding: 13rem;background-color: aqua;">
+        <form action="/" id="form" method="GET">
+            <div>
+                <label for="fname">First Name</label>
+                <input id="fname" name="fname" type="text">
+                <br>
+                <label for="lname">Last Name</label>
+                <input id="lname" name="lname" type="text">
+                <br>
+                <label for="rollNo">Roll No</label>
+                <input id="rollno" name="rollno" type="number">
+                <br>
+                <label for="dob">D.O.B</label>
+                <input id="dob" name="dob" type="date">
+                <br>
+                <label for="age">Age</label>
+                <input id="age" name="age" type="number">
+                <br>
+                <label for="occup">Occupation</label>
+                <input id="occup" name="occup" type="text">
+                <br>
+                <label for="gen">Choose gender:</label>
+                <select id="gen" name="gen">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                 <br>
+                <div style="padding-top: 1rem;"> 
+                <button type="submit" >Submit</button>
+                </div>
+            </div>
+        </form>
+        <label for="rollNoInput">RollNo Input</label>
+            <input id="rollNoInput" name="rollNoInput" type="number" placeholder="Enter Roll No to get Details">
+            <br>
+            <div style="padding-top: 1rem;"> 
+            <button onClick="getStudentViaRollNo()" >Find</button>
+            </div>
+            <p id="stuFound"></p>
+
+
+        </div>
+    <script>
+        let studentArray=[];
+        (function () {
+        //THIS IS THE IFFE FUCNTION
+        alert("THIS ALERT box is CALLED using IIFE \n THIS PAGE ALLOWS YOU TO ENTER STUDENT DETAILS AND FIND THEM BY ROLL NO")
+        
+        })();
+
+
+        class Student {
+            constructor(fname,lname,age,gen,rollno,dob,occup) {
+            this.fname = fname;
+            this.lname=lname;
+            this.age=age;
+            this.gen=gen;
+            this.rollno=rollno;
+            this.dob=dob;
+            this.occup=occup;
+            }
+            getStudentName(){
+                let fullName= this.fname+" "+this.lname;
+                return fullName;
+            }
+            getRollNo(){
+                return this.rollno;
+            }
+            getAge(){
+                return this.age;
+            }
+            getDob(){
+                return this.dob;
+            }
+            getOccup(){
+                return this.occup;
+            }
+            studentDetails(methodUsed){
+            let details="Method Used to print details is  :"+methodUsed+
+                        "\nStudent fullname is :"+this.getStudentName()+
+                        "\nStudent RollNo is :"+this.getRollNo()+
+                        "\nStudent Age is :"+this.getAge()+
+                        "\nStudent Dob is :"+this.getDob()+
+                        "\nStudent Ocuupation is :"+this.getOccup();
+                        
+            console.log(details);
+            return details           
+        };
+    }
+     
+      
+       
+        
+        const form=document.getElementById("form");
+        const fname =document.getElementById("fname");
+        const lname=document.getElementById("lname");
+        const age=document.getElementById("age");
+        const rollno=document.getElementById("rollno");
+        const occup=document.getElementById("occup");
+        const dob=document.getElementById("dob");
+        const gen=document.getElementById("gen");
+        const rollNoInput=document.getElementById("rollNoInput");
+        const stuFound=document.getElementById("stuFound");
+        
+        
+        
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault();
+            if(checkAllInputsValid()){
+         
+                console.log("NO ERROR IN INPUT");
+                let studentObj=new Student(fname.value,lname.value,
+                                                age.value,gen.value,
+                                                rollno.value,dob.value,
+                                                occup.value);
+                studentArray.push(studentObj);
+
+                alert(studentObj.studentDetails.apply(studentObj,["APPLY"]));
+                alert(studentObj.studentDetails.call(studentObj,"CALL"));
+                
+
+            }else{
+    
+                console.log("ERRORS IN INPUT");
+               
+            }
+        });
+        function checkAllInputsValid(){
+           let errorMessgae=[];
+            if(fname.value===''||fname.value==null){
+                errorMessgae.push("Fname Req");
+            }
+            if(lname.value===''||lname.value==null){
+                errorMessgae.push("Lname Req");
+            }
+            if(dob.value===''||dob.value==null){
+                errorMessgae.push("Dob Req");
+            }
+            if(age.value===''||age.value==null){
+                errorMessgae.push("Age Req");
+            }
+            if(rollno.value===''||rollno.value==null){
+                errorMessgae.push("RollNo Req");
+            }
+            if(occup.value===''||occup.value==null){
+                errorMessgae.push("Occupation Req");
+            }
+            if(errorMessgae.length>0) {
+            alert(errorMessgae.join(","));
+            return false;
+            }   
+            else{
+               
+                return true;
+            }
+        }
+
+        function getStudentViaRollNo(){
+            if(rollNoInput.value===''||rollNoInput.value==null){
+
+                alert("Enter a Roll No");
+            }else{
+                let stu=null;
+                for (let i=0; i<studentArray.length; i++) {
+                if (studentArray[i].rollno == rollNoInput.value) 
+                stu=studentArray[i];
+                break;
+                }
+                if(stu!=null){
+                // stuFound.innerHTML=stu.studentDetails();
+                alert(stu.studentDetails("normal"));
+                console.log("student found");
+
+                }else{
+                    console.log("No student with that roll no Exists :(");
+                    alert("No student with that roll no Exists :(");
+                }
+               
+            }
+
+        }
+
+</script>
+</body>
+</html>

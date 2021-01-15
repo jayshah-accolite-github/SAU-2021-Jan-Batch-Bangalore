@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O5 : Assignment</title>
+   
+</head>
+<body>
+   
+    <div  style="display: flex; flex-direction: column ;width: max-content;height: max-content;justify-content: center;padding: 13rem;background-color: aqua;">
+        <div>
+            <label for="String">String Input</label>
+            <input id="str" name="str" type="text" placeholder="Enter String">
+            <br>
+            <div style="padding-top: 1rem;"> 
+            <button onClick="callAllFunction()" >Submit</button>
+            </div>
+        </div>
+
+    <div>
+        <h4>Length Of the Input: <span id="lengthAns"></span></h4>
+        <h4>UpperCase Of the Input: <span id="upperCaseAns"></span></h4>
+        <h4>LowerCase Of the Input: <span id="lowerCaseAns"></span></h4>
+        <h4>Vowels in the Input: <span id="vowelAns"></span></h4>
+        <h4>Consonants in the Input: <span id="consAns"></span></h4>
+        <h4>Shows an alert box if digit is present in the string</h4>
+    </div>
+</div>
+    <script>
+      
+        class input {
+            constructor(param) {
+            this.input = param;
+            }
+            checkIsNumberPresent(){
+                let sentArray = Array.from(this.input);
+                let i;
+                for(i=0;i<sentArray.length;i++) {
+                if(sentArray[i]>='0' && sentArray[i]<='9'){
+                return true;
+                    }
+                }
+                return false;
+            }
+            getLength() {
+                console.log("Length :"+this.input.length);
+                return this.input.length;
+            };
+            getUpperCase() {
+                console.log("UpperCase :"+this.input.toUpperCase());
+                return this.input.toUpperCase();
+            };
+            getLowerCase() {
+                console.log("LowerCase :"+this.input.toLowerCase());
+                return this.input.toLowerCase();
+            };
+            getVowels(){
+                let sentArray = Array.from(this.input);
+                let vowels=[];
+                let consonats=[];
+                let i;
+                for(i=0;i<sentArray.length;i++)
+                {
+                    if((sentArray[i]>='a' && sentArray[i]<='z')||
+                    (sentArray[i]>='A' && sentArray[i]<='Z')){
+                    if(isVowel(sentArray[i]))
+                    {
+                        vowels.push(sentArray[i]);
+                    }
+                }
+                }
+                console.log("Vowels : "+vowels.join(''));
+                return vowels.join('');
+           
+            };
+            getCons(){
+                let sentArray = Array.from(this.input);
+                let consonats=[];
+                let i;
+                for(i=0;i<sentArray.length;i++)
+                {
+                    if((sentArray[i]>='a' && sentArray[i]<='z')||
+                    (sentArray[i]>='A' && sentArray[i]<='Z')){
+                    if(!isVowel(sentArray[i]))
+                    {
+                        consonats.push(sentArray[i]);
+                    }
+                }
+                }
+                console.log("Consonants : "+consonats.join(''));
+                return consonats.join('');
+           
+            };
+
+        }
+
+        function isVowel(chr){
+            let vowels = ["a","e","i","o","u","A","E","I","O","U"];
+            if(vowels.includes(chr))
+            {
+            return true;
+            }else{
+            return false;
+            }
+        };
+
+        function callAllFunction() {
+            let inputValue = document.getElementById("str").value;
+            let inputObject = new input(inputValue);
+            
+            if(inputObject.checkIsNumberPresent()){
+            
+                alert("Error : Number is present in the string")
+            
+            }else{
+                console.log("No Number is present in the string input")
+                document.getElementById("lengthAns").innerHTML = inputObject.getLength();
+                document.getElementById("upperCaseAns").innerHTML = inputObject.getUpperCase();
+                document.getElementById("lowerCaseAns").innerHTML = inputObject.getLowerCase();
+                document.getElementById("vowelAns").innerHTML = inputObject.getVowels();
+                document.getElementById("consAns").innerHTML = inputObject.getCons();
+            
+            }
+        }
+
+
+</script>
+</body>
+</html>
