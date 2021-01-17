@@ -1,0 +1,12 @@
+
+    <div class="todosList" *ngFor="let TodoModel of todosList;let i=index">
+        <div class="todo" (click)="toggleDetails(i+1)"> 
+            <div class="todoInfo">
+            <div class="id">Id: {{TodoModel.id}}</div>
+            <div class="userId" >UserId: {{TodoModel.userId}}</div>
+            <div class="title" >Title: {{TodoModel.title}}</div>   
+            <div class="status" >Todo Status: {{TodoModel.completed}}</div>   
+        </div>
+       
+        </div>
+    </div>

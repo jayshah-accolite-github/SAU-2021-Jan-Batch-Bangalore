@@ -1,0 +1,48 @@
+<div class="sessions">
+    <div class="addSessions">
+        <button (click)="toggleAdd()" >Add Session</button>
+        
+    </div>
+    <div class="addSesDetails">
+        <div  *ngIf="addTemplateToggleValue"class="AddTemplate">
+            <label for="name">Session Name</label>
+            <input   [(ngModel)]="addName" type="text">
+            <label for="trainer">Session Trainer</label>
+            <input  [(ngModel)]="addTrainer" type="text">
+            <label for="date">Date</label>
+            <input [(ngModel)]="addDate" type="Date">
+            <button (click)="addSessionList()">Add In list</button>
+        </div>
+    </div>
+    <div class="editSession">
+        <div  *ngIf="editTemplateToggleValue"class="AddTemplate">
+            <label for="name">Session Name</label>
+            <input [(ngModel)]="editName" type="text">
+            <label for="trainer">Session Trainer</label>
+            <input  [(ngModel)]="editTrainer" type="text">
+            <label for="date">Date</label>
+            <input [(ngModel)]="editDate" type="Date">
+            <button (click)="editSessionList()">Edit In list</button>
+            
+            <button (click)="closeSessionList()">Close Edit In list</button>
+        </div>
+    </div>
+    <div class="sessionList" *ngFor="let sessionModel of sessions;let i=index">
+
+        <div class="sessionInfo" >
+
+        <div class="id">Id: {{i}}</div>
+        <div class="sessionName" (click)="toggleDetails(i)">Session Name: {{sessionModel.sessionName}}</div>
+            <div class="actions">
+            <button class="edit" (click)=" toggleSessionEdit(sessionModel,i)">Edit</button>
+            <button class="delete" (click)="deleteSession(i)">Delete</button>
+            </div>    
+    </div>
+        
+            <div class="sessionDetailInfo" *ngIf="sessionModel.details">
+                <div class="sessionTrainer">Trainer: {{sessionModel.trainer}}</div>
+                <div class="date">Session Date: {{sessionModel.date}}</div>
+            </div>
+        </div>
+    
+</div>

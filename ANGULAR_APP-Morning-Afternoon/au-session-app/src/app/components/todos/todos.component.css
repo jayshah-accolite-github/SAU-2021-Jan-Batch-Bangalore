@@ -1,0 +1,30 @@
+.todosList{
+    background-color: teal;
+    display: flex;
+
+}
+.todo{
+    width: 100%;
+    margin: 2%;
+    background-color:cadetblue;
+    display: flex;
+    flex-direction: column;
+}
+.todoInfo{
+    display: flex;
+    padding: 1%;
+justify-content: space-evenly;
+}
+.id{
+width: 15%;
+}
+.userId{
+
+    width: 15%;
+}
+.title{
+    width: 55%;
+}
+.todoDetails{
+    width: 15%;
+}
