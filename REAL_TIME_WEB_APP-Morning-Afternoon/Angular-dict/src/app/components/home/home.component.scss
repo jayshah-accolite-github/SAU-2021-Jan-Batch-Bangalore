@@ -1,0 +1,65 @@
+.home-page-container {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+}
+.list-of-word {
+  margin-top: 1rem;
+  flex: 1;
+
+  max-height: 90vh;
+}
+.sortList {
+  margin: 1rem;
+}
+.edit-word {
+  flex: 1;
+  padding: 3rem;
+}
+.nav {
+  display: flex;
+}
+.word-heading {
+  margin: 1rem;
+  font-size: 3rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-style: italic;
+}
+.word-heading-addWord {
+  font-size: 2.2rem;
+  margin: 1rem;
+  padding-left: 16rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-style: italic;
+}
+.searchBar {
+  margin: 1rem;
+}
+.word {
+  margin: 1rem;
+  border: 0.5px solid #444;
+  padding: 1rem;
+  display: flex;
+  .meaning {
+    line-height: 1.4;
+    flex: 6;
+  }
+  .buttons {
+    padding: 0.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    button {
+      padding: 0.3rem;
+    }
+    button:first-child {
+      background-color: #00ff00;
+      margin-bottom: 1rem;
+    }
+    button:nth-child(2) {
+      background-color: #ff944d;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<section class="home-page">
+    <div class="home-page-container">
+      <div class="list-of-word">
+        <div class= "nav">
+        <span class="word-heading">Words</span>
+        <a routerLink="/addWord" class="word-heading-addWord"routerLinkActive="active">Add Word</a>
+      
+        </div>
+        <div>  
+        <form class="searchBar"  [formGroup]="searchForm" >
+            <div class="form-group">
+              <input formControlName="search" placeholder="Enter words" />
+              <button class="btn btn-primary" (click)="searchMatch()" type="submit">Submit</button>
+              <button (click)="reset()">reset</button>
+            </div>
+           </form>
+         
+          <div *ngIf="wordsList.length == 0">
+            No words found
+          </div>
+        </div>
+          <form class="sortList"  [formGroup]="form" (ngSubmit)="sort()">
+        <div class="form-group">
+          <label for="sortBy">Sort by:</label>
+          <select (change)="sort()" formControlName="sortBy" class="form-control">
+            <option>Default: Last Added</option>
+            <option *ngFor="let option of optionsList">{{option}}</option>
+          </select>
+        </div>
+        </form>
+        <div class="word" *ngFor="let item of wordsList;let i=index">
+          <div class="meaning">
+            {{item.id}}
+            Word: {{ item.word }} <br />
+            Part Of Speech: {{ item.partOfSpeech }}<br />
+            Meaning: {{ item.meaning }}<br />
+            Example Sentence: {{ item.example }}<br />
+            Created : {{item.creationTm}}<br />
+            last modified: {{item.lastModifiedTm}}
+          </div>
+          <div class="buttons">
+            <button (click)="edit(item)" >
+              Edit
+            </button>
+            <button (click)="delete(item)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="edit-word">
+        <app-update   [editableData]="editableWord" (updateWord)="updateWord($event)" [action]="'Update word'"></app-update>
+      </div>
+    </div>
+  </section>
